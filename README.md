@@ -2,6 +2,8 @@
 
 Connect your Metamask Wallet to the NFT Window to interact with the NFTs.
 
+**[Demo](https://nft-window.herokuapp.com/)**
+
 ## Setup
 
 1. Get your Covalent API key from [Covalent](https://www.covalenthq.com/)
