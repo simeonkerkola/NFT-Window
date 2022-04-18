@@ -12,4 +12,4 @@ Connect your Metamask Wallet to the NFT Window to interact with the NFTs.
 REACT_APP_COVALENT_KEY='your-api-key'
 ```
 
-3. Run `yarn start`
+3. Run `yarn dev`
