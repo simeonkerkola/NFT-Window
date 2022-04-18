@@ -16,7 +16,7 @@ interface CovalentResponse {
       contract_name: string;
       contract_address: string;
       nft_data?: {
-        external_data?: { image: string };
+        external_data?: { image: string; image_256: string };
         token_id: string;
       }[];
       supports_erc: string[];
@@ -68,7 +68,7 @@ export default function useCovalent(accountId: string) {
                 return {
                   name: token.contract_name,
                   contractAddress: token.contract_address,
-                  image: nft.external_data?.image || '',
+                  image: nft.external_data?.image_256 || nft.external_data?.image || '',
                   tokenId: nft.token_id,
                 };
               }) || [];
