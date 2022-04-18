@@ -21,10 +21,19 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   border: 2px solid ${(props) => props.theme.colors.neutral['400']};
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   font-size: 1rem;
   padding: 0 0.5rem;
   width: 150px;
   border-right: none;
+`;
+
+const SendButton = styled(Button)`
+  border: 2px solid ${(props) => props.theme.colors.neutral['400']};
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 `;
 
 const InputGroup = styled.div`
@@ -82,7 +91,7 @@ function SendNftForm({
       <StyledLabel htmlFor={inputId}>Send to address</StyledLabel>
       <InputGroup>
         <StyledInput required onInput={handleInput} type="text" id={inputId} />
-        <Button type="submit">Send</Button>
+        <SendButton type="submit">Send</SendButton>
       </InputGroup>
     </StyledForm>
   );
