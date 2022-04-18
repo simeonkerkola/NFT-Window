@@ -10,13 +10,13 @@ export interface NFT {
 interface CovalentResponse {
   error: boolean;
   error_message: string;
-  data: {
-    items: {
+  data?: {
+    items?: {
       type: string;
       contract_name: string;
       contract_address: string;
-      nft_data: {
-        external_data: { image: string } | undefined;
+      nft_data?: {
+        external_data?: { image: string };
         token_id: string;
       }[];
       supports_erc: string[];
@@ -60,21 +60,23 @@ export default function useCovalent(accountId: string) {
           setLoading(false);
         });
         if (json.error) setErrorMsg(json.error_message);
-
-        const nftTokens = json.data.items.filter((item) => getIsNft(item));
-        const nfts: NFT[] = nftTokens.reduce((acc: NFT[], token) => {
-          const nftData = token.nft_data.map((nft) => {
-            return {
-              name: token.contract_name,
-              contractAddress: token.contract_address,
-              image: nft.external_data?.image || '',
-              tokenId: nft.token_id,
-            };
-          });
-          return [...acc, ...nftData];
-        }, []);
-        setNfts(nfts);
-        setLoading(false);
+        if (json.data?.items?.length) {
+          const nftTokens = json.data.items.filter((item) => getIsNft(item));
+          const nfts: NFT[] = nftTokens.reduce((acc: NFT[], token) => {
+            const nftData =
+              token?.nft_data?.map((nft) => {
+                return {
+                  name: token.contract_name,
+                  contractAddress: token.contract_address,
+                  image: nft.external_data?.image || '',
+                  tokenId: nft.token_id,
+                };
+              }) || [];
+            return [...acc, ...nftData];
+          }, []);
+          setNfts(nfts);
+          setLoading(false);
+        }
       }
     }
     if (accountId) fetchNftData();
