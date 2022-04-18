@@ -2,3 +2,4 @@
 interface Window {
   ethereum?: any;
 }
+declare module 'styled-components';
